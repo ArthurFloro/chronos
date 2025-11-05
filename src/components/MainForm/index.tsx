@@ -4,8 +4,14 @@ import { Cycles } from "../Cycles";
 import { Input } from "../Input";
 
 export function MainForm() {
+  function handleNewTask(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    console.log("DEU CERTO");
+  }
+
   return (
-    <form className="form" action="">
+    <form onSubmit={handleNewTask} className="form" action="">
       <div className="formRow">
         <Input
           labelText="Tarefa"
