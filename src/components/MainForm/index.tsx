@@ -54,6 +54,18 @@ export function MainForm() {
     });
   }
 
+  function handleStopTask() {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        config: { ...prevState.config },
+        activeTask: null,
+        secondsRemaining: 0,
+        formattedSecondsRemaining: "00:00",
+      };
+    });
+  }
+
   return (
     <form onSubmit={handleNewTask} className="form" action="">
       <div className="formRow">
@@ -76,7 +88,7 @@ export function MainForm() {
       </div>
 
       <div className="formRow">
-        {!state.activeTask ? (
+        {!state.activeTask && (
           <Button
             aria-label="Iniciar nova tarefa"
             title="Iniciar nova tarefa"
@@ -84,13 +96,16 @@ export function MainForm() {
             icon={<PlayCircleIcon />}
             color="green"
           />
-        ) : (
+        )}
+
+        {!!state.activeTask && (
           <Button
             aria-label="Parar tarefa"
             title="Parar tarefa"
             type="submit"
             icon={<StopCircleIcon />}
             color="red"
+            onClick={handleStopTask}
           />
         )}
       </div>
